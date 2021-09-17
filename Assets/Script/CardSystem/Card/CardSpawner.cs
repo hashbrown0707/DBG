@@ -6,7 +6,7 @@ using Utility;
 
 namespace CardSystem
 {
-    public class CardSpawner : Singleton<CardSpawner>
+    public class CardSpawner
     {
         public GameObject panel;
 

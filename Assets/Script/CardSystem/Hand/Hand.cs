@@ -7,17 +7,19 @@ namespace CardSystem
 {
     public class Hand : MonoBehaviour
     {
-        public Transform handCenterPoint;
         public int maxCardAmount;
         private int currentCardAmount;
 
+        public Transform handCenterPoint;
         private HandLayout handLayout;
+        private Piles piles;
         private List<ICard> handList = new List<ICard>();
 
         #region Unity Call Back Function
         private void Awake()
         {
             handLayout = new HandLayout(handCenterPoint);
+            piles = new Piles();
 
         }
 
@@ -39,7 +41,7 @@ namespace CardSystem
         public void DrawUntilMax()
         {
             for (int i = 0; i < maxCardAmount; i++)
-                AddCard(CardSpawner.Instance.GetSpawndCard(Deck.Instance.DrawCardOnTop()));
+                AddCard(piles.DrawCard());
         }
 
         public void AddCard(ICard card)
