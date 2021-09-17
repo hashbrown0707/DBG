@@ -60,7 +60,6 @@ namespace DialogueSystem
         {
             currentChunk = null;
             dialogueDisplay.gameObject.SetActive(false);
-            hand.RemoveAllCard();
         }
         
         //private void DisplayChooseCard(DialogueChunk[] bifurcationChunk, Action action)

@@ -39,7 +39,7 @@ namespace CardSystem
         public void DrawUntilMax()
         {
             for (int i = 0; i < maxCardAmount; i++)
-                AddCard(CardSpawner.Instance.GetSpawndCard(DeckManager.Instance.DrawCardOnTop()));
+                AddCard(CardSpawner.Instance.GetSpawndCard(Deck.Instance.DrawCardOnTop()));
         }
 
         public void AddCard(ICard card)
