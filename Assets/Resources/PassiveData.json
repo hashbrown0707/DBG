@@ -1,0 +1,31 @@
+{
+
+  "Passive1" {
+    "ID": 1,
+    "Icon": 1,
+    "PassiveRank": 1,
+    "TriggerType": 1,
+    "TriggeredCount": 3,
+    "Description": "第一個遺物"
+  },
+  "Passive2" {
+    "ID": 1,
+    "Icon": 1,
+    "PassiveRank": 1,
+    "TriggerType": 1,
+    "TriggeredCount": 3,
+    "Description": "第二個遺物"
+  },
+
+  "Passive3" {
+    "ID": 1,
+    "Icon": 1,
+    "PassiveRank": 1,
+    "TriggerType": 1,
+    "TriggeredCount": 3,
+    "Description": "第三個遺物"
+  }
+
+
+
+}
