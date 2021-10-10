@@ -47,7 +47,7 @@ namespace CardSystem
                 e.Execute(player, target, effects[e]);
             }
 
-            hand.RemoveCard(this);
+            hand.DiscardCard(this);
         }
         #endregion
 

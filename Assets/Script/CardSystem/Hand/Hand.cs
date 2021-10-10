@@ -8,9 +8,9 @@ namespace CardSystem
     public class Hand : MonoBehaviour
     {
         public int maxCardAmount;
-        private int currentCardAmount;
 
         public Transform handCenterPoint;
+        private CardSpawner cardSpawner;
         private HandLayout handLayout;
         private Piles piles;
         private List<ICard> handList = new List<ICard>();
@@ -20,7 +20,7 @@ namespace CardSystem
         {
             handLayout = new HandLayout(handCenterPoint);
             piles = new Piles();
-
+            cardSpawner = new CardSpawner();
         }
 
         #endregion
@@ -36,40 +36,57 @@ namespace CardSystem
         }
 
         #endregion
-
+        
         #region Logic
         public void DrawUntilMax()
         {
-            for (int i = 0; i < maxCardAmount; i++)
-                AddCard(piles.DrawCard());
+            for (int i = 0; i < maxCardAmount; ++i)
+                AddCard(piles.GetTopOfDrawPile());
         }
 
-        public void AddCard(ICard card)
+        public void DrawCards(int amount)
         {
-            if (currentCardAmount >= maxCardAmount)
+            for (int i = 0; i < amount; ++i)
+                AddCard(piles.GetTopOfDrawPile());
+        }
+
+        //目前在這邊把卡實體化
+        public void AddCard(CardData cardData)
+        {
+            if (handList.Count >= maxCardAmount)
             {
                 Debug.Log("Hand is full.");
                 return;
             }
 
-            handList.Add(card);
+            if(cardData == null)
+            {
+                Debug.LogWarning("CardData null");
+                return;
+            }
+
+            handList.Add(cardSpawner.GetSpawndCard(handCenterPoint.parent.transform, cardData));
             UpdateLayout();
         }
 
-        public void RemoveAllCard()
+        public void DiscardAllCard()
         {
             foreach (var card in handList)
+            {
+                piles.AddCardTo(Pile.discardPile, card);
                 ObjectPool.Instance.ReturnObjectToPool(card.gameObject);
+            }
 
             handList.Clear();
             UpdateLayout();
         }
 
-        public void RemoveCard(ICard card)
+        public void DiscardCard(ICard card)
         {
             if (handList.Contains(card))
             {
                 ObjectPool.Instance.ReturnObjectToPool(card.gameObject);
+                piles.AddCardTo(Pile.discardPile, card);
                 handList.Remove(card);
                 UpdateLayout();
             }

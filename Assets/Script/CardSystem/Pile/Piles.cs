@@ -5,23 +5,46 @@ using Utility;
 
 namespace CardSystem
 {
+    public enum Pile
+    {
+        drawPile,
+        discardPile,
+        exhaustPile
+    }
+
     public class Piles
     {
-        private List<ICard> drawPileList = new List<ICard>();
-        private List<ICard> discardPileList = new List<ICard>();
-        private List<ICard> exhaustPileList = new List<ICard>();
+        public static List<CardData> drawPileList { get; private set; } = new List<CardData>();
+        public static List<CardData> discardPileList { get; private set; } = new List<CardData>();
+        public static List<CardData> exhaustPileList  { get; private set; } = new List<CardData>();
 
         public void InitAllPiles(Deck deck)
         {
             drawPileList.Clear();
-            drawPileList.Clear();
+            discardPileList.Clear();
             exhaustPileList.Clear();
 
-            foreach (ICard card in deck.deckList)
+            foreach (var card in deck.deckList)
                 drawPileList.Add(card);
         }
 
-        public ICard DrawCard()
+        public void AddCardTo(Pile pile, ICard card)
+        {
+            switch (pile)
+            {
+                case Pile.drawPile:
+                    drawPileList.Add((card as Card).cardData);
+                    break;
+                case Pile.discardPile:
+                    discardPileList.Add((card as Card).cardData);
+                    break;
+                case Pile.exhaustPile:
+                    exhaustPileList.Add((card as Card).cardData);
+                    break;
+            }
+        }
+
+        public CardData GetTopOfDrawPile()
         {
             if (drawPileList.Count <= 0)
                 ReloadDrawPile();
@@ -32,7 +55,7 @@ namespace CardSystem
         /// <summary>
         /// 把棄牌堆所有牌重新洗牌到抽排堆
         /// </summary>
-        public void ReloadDrawPile()
+        private void ReloadDrawPile()
         {
             foreach (var card in discardPileList)
                 drawPileList.Add(card);

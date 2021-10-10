@@ -11,26 +11,27 @@ namespace CardSystem
     {
         private BinaryFormatter bf;
         private Stream s;
-        private CardSpawner cardSpawner;
 
-        public List<ICard> deckList = new List<ICard>();
+        public List<CardData> deckList { get; private set; } = new List<CardData>();
 
         public Deck()
         {
             bf = new BinaryFormatter();
-            cardSpawner = new CardSpawner();
         }
 
         /// <summary>
         /// 用SO初始化Deck, 在賦予遊戲內定義牌組(初始牌組)時使用
         /// </summary>
+        /// <param name="handPanel">Parent transform</param>
         /// <param name="deckData">scriptable object class</param>
         public void InitDeck(DeckData deckData)
         {
             foreach (var cardData in deckData.cardDatas)
             {
-                ICard card = cardSpawner.GetSpawndCard(cardData);
-                deckList.Add(card);
+                deckList.Add(cardData);
+
+                //ICard card = cardSpawner.GetSpawndCard(handPanel, cardData);
+                //deckList.Add(card);
             }
         }
 
@@ -44,7 +45,7 @@ namespace CardSystem
         public void LoadDeck()
         {
             s = File.Open(Application.dataPath + "DeckBinaryFile.dat", FileMode.Open);
-            deckList = bf.Deserialize(s) as List<ICard>;
+            deckList = bf.Deserialize(s) as List<CardData>;
             s.Close();
 
             if (deckList == null)
