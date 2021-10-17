@@ -23,7 +23,7 @@ public class BattleState : MonoBehaviour
 
     public void StartBattle()
     {
-        piles.InitAllPiles(deck);
+        piles.ResetAllPiles(deck);
         StartTurn();
     }
 

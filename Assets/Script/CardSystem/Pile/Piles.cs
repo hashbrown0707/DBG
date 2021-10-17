@@ -18,7 +18,7 @@ namespace CardSystem
         public static List<CardData> discardPileList { get; private set; } = new List<CardData>();
         public static List<CardData> exhaustPileList  { get; private set; } = new List<CardData>();
 
-        public void InitAllPiles(Deck deck)
+        public void ResetAllPiles(Deck deck)
         {
             drawPileList.Clear();
             discardPileList.Clear();
