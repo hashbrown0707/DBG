@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    public Data data;
+    public PlayerData data;
 
     public int maxHealth { get; private set; }
     public int health { get; private set; }

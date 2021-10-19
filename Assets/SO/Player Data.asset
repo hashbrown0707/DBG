@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   maxHealth: 70
+  deckData: {fileID: 11400000, guid: 9499e855d4528cb4188ac95f960b036f, type: 2}

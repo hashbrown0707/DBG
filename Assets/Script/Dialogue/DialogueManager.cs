@@ -15,8 +15,6 @@ namespace DialogueSystem
         [Tooltip("顯示對話的Text")]
         public Text dialogueDisplayContent;
 
-        public Hand hand;
-
         private Queue<string> textQueue = new Queue<string>();
         private DialogueChunk currentChunk;
 
@@ -60,7 +58,6 @@ namespace DialogueSystem
         {
             currentChunk = null;
             dialogueDisplay.gameObject.SetActive(false);
-            hand.RemoveAllCard();
         }
         
         //private void DisplayChooseCard(DialogueChunk[] bifurcationChunk, Action action)

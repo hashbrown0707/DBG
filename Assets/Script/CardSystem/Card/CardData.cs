@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 
 namespace CardSystem
 {
-    [CreateAssetMenu(menuName = "Card")]
+    [CreateAssetMenu(menuName = "CardSystem/Card")]
     public class CardData : SerializedScriptableObject
     {
         public int cardID;

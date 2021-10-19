@@ -10,10 +10,11 @@ namespace Utility
         /// <summary>
         /// 回傳list[0]並使他在list中消失
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
         public static T PopFront<T>(this IList<T> list)
         {
+            if (list == null || list.Count == 0)
+                return default(T);
+
             T temp = list[0];
             list.RemoveAt(0);
             return temp;
